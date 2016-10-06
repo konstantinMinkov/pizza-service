@@ -3,6 +3,8 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
+    <bean name="service1" class="ua.rd.pizzaservice.services.TestSomeService2"/>
+
     <bean name="pizzaRepository"
           class="ua.rd.pizzaservice.repository.InMemoryPizzaRepository"
           init-method="init"/>
