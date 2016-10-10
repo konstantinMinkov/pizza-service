@@ -9,4 +9,8 @@ public class TestSomeService1 implements SomeService {
     public String getString() {
         return "Test1";
     }
+
+    public void destroy() {
+        System.out.println("destroy");
+    }
 }

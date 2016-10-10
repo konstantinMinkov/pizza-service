@@ -3,14 +3,7 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
-    <bean name="service1" class="ua.rd.pizzaservice.services.TestSomeService2"/>
-
-    <bean name="pizzaRepository"
-          class="ua.rd.pizzaservice.repository.InMemoryPizzaRepository"
-          init-method="init"/>
-
-    <bean name="orderRepository"
-          class="ua.rd.pizzaservice.repository.InMemoryOrderRepository"/>
+    <bean name="T1" class="ua.rd.pizzaservice.services.TestSomeService2"/>
 
     <bean name="pizzaService"
           class="ua.rd.pizzaservice.services.SimplePizzaService">
@@ -21,5 +14,12 @@
           class="ua.rd.pizzaservice.services.SimpleOrderService">
         <constructor-arg ref="orderRepository"/>
         <constructor-arg ref="pizzaService"/>
+    </bean>
+
+    <bean class="ua.rd.pizzaservice.services.UsageSomeService"
+          init-method="init">
+        <constructor-arg>
+            <bean class="ua.rd.pizzaservice.services.TestSomeService2"/>
+        </constructor-arg>
     </bean>
 </beans>
