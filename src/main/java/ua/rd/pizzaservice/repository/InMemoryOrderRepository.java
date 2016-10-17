@@ -1,13 +1,13 @@
 package ua.rd.pizzaservice.repository;
 
+import org.springframework.stereotype.Repository;
 import ua.rd.pizzaservice.domain.Order;
 
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by Kostiantyn_Minkov on 10/4/2016.
- */
+
+@Repository
 public class InMemoryOrderRepository implements OrderRepository {
 
     private List<Order> orders = new ArrayList<>();

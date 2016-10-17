@@ -8,9 +8,6 @@ import ua.rd.pizzaservice.infrastructure.Context;
 import ua.rd.pizzaservice.infrastructure.JavaConfig;
 import ua.rd.pizzaservice.services.SimpleOrderService;
 
-/**
- * Created by Kostiantyn_Minkov on 10/4/2016.
- */
 
 public class AppRunner {
 

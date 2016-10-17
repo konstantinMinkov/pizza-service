@@ -1,25 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
 
-    <bean name="T1" class="ua.rd.pizzaservice.services.TestSomeService2"/>
+    <context:annotation-config/>
+    <context:component-scan base-package="ua.rd.pizzaservice.services"/>
+    <context:component-scan base-package="ua.rd.pizzaservice.domain"/>
 
-    <bean name="pizzaService"
-          class="ua.rd.pizzaservice.services.SimplePizzaService">
-        <constructor-arg ref="pizzaRepository"/>
+    <bean class="ua.rd.pizzaservice.infrastructure.BenchmarkBeanPostProcessor"/>
+
+    <bean id="loyaltyCardDiscount" class="ua.rd.pizzaservice.domain.discounts.LoyaltyCardDiscount">
+        <constructor-arg index="0" value="10"/>
+        <constructor-arg index="1" value="30"/>
     </bean>
 
-    <bean name="orderService"
-          class="ua.rd.pizzaservice.services.SimpleOrderService">
-        <constructor-arg ref="orderRepository"/>
-        <constructor-arg ref="pizzaService"/>
+    <bean id="mostExpensivePizzaDiscount"
+          class="ua.rd.pizzaservice.domain.discounts.MostExpensivePizzaDiscount">
+        <constructor-arg value="30"/>
     </bean>
 
-    <bean class="ua.rd.pizzaservice.services.UsageSomeService"
-          init-method="init">
+    <bean id="discountService" class="ua.rd.pizzaservice.services.DiscountService">
         <constructor-arg>
-            <bean class="ua.rd.pizzaservice.services.TestSomeService2"/>
+            <list>
+                <ref bean="mostExpensivePizzaDiscount"/>
+                <ref bean="loyaltyCardDiscount"/>
+            </list>
         </constructor-arg>
     </bean>
+
 </beans>

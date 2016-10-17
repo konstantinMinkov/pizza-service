@@ -1,14 +1,21 @@
 package ua.rd.pizzaservice.domain;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
-/**
- * Created by Kostiantyn_Minkov on 10/4/2016.
- */
+import java.util.concurrent.atomic.AtomicLong;
+
 
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class Customer {
 
-    private Long id;
+    private static AtomicLong lastId = new AtomicLong(-1);
+
+    private final Long id = lastId.incrementAndGet();
     private String name;
+    private Address address;
+    private LoyaltyCard loyaltyCard;
 }

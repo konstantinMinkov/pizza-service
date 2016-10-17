@@ -8,5 +8,4 @@ import ua.rd.pizzaservice.domain.Pizza;
 public interface PizzaRepository {
 
     Pizza findById(int id);
-
 }
