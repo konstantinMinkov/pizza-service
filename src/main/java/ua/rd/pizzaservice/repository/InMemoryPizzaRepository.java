@@ -19,11 +19,11 @@ public class InMemoryPizzaRepository implements PizzaRepository {
 
     @PostConstruct
     public void init() {
-        availablePizzas.add(new Pizza(0, "Pizza 1", 240L, PizzaType.MEAT));
-        availablePizzas.add(new Pizza(1, "Pizza 2", 140L, PizzaType.SEA));
-        availablePizzas.add(new Pizza(2, "Pizza 3", 350L, PizzaType.VEGETARIAN));
-        availablePizzas.add(new Pizza(3, "Pizza 4", 120L, PizzaType.MEAT));
-        availablePizzas.add(new Pizza(4, "Pizza 5", 270L, PizzaType.SEA));
+        availablePizzas.add(new Pizza("Pizza 1", 240L, PizzaType.MEAT));
+        availablePizzas.add(new Pizza("Pizza 2", 140L, PizzaType.SEA));
+        availablePizzas.add(new Pizza("Pizza 3", 350L, PizzaType.VEGETARIAN));
+        availablePizzas.add(new Pizza("Pizza 4", 120L, PizzaType.MEAT));
+        availablePizzas.add(new Pizza("Pizza 5", 270L, PizzaType.SEA));
     }
 
     public void postCreate() {

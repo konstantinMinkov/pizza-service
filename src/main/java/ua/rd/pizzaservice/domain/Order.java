@@ -5,28 +5,33 @@ import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
-import java.math.BigDecimal;
+import javax.persistence.*;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
-import java.util.concurrent.atomic.AtomicLong;
+import java.util.Map;
+import java.util.concurrent.atomic.AtomicInteger;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 
 @Data
 @Component
 @Scope(BeanDefinition.SCOPE_PROTOTYPE)
+@SequenceGenerator(sequenceName = "OrderSeq", name = "OrderSeq")
 public class Order {
 
-    private static AtomicLong lastId = new AtomicLong(-1);
-
-    private final Long id = lastId.incrementAndGet();
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO, generator = "OrderSeq")
+    private Long id;
     private Customer customer;
-    private List<Pizza> pizzas;
+
+    @Transient //todo
+    private Map<Pizza, Long> pizzas;
     private OrderStatus orderStatus;
 
     public Order(Customer customer, List<Pizza> pizzas) {
         this(customer);
-        this.pizzas = pizzas;
+        setPizzas(pizzas);
     }
 
     public Order(Customer customer) {
@@ -41,8 +46,8 @@ public class Order {
     public Long totalPrice() {
         if (pizzas == null) throw new IllegalStateException("No pizzas in order");
         Long total = 0L;
-        for (Pizza pizza : pizzas) {
-            total += pizza.getPrice();
+        for (Pizza pizza : pizzas.keySet()) {
+            total += pizza.getPrice() * pizzas.get(pizza);
         }
         return total;
     }
@@ -52,5 +57,20 @@ public class Order {
             throw new IllegalStateException("Can't change to such status.");
         }
         orderStatus = status;
+    }
+
+    public void setPizzas(List<Pizza> pizzas) {
+        this.pizzas = pizzas.stream().collect(
+                Collectors.groupingBy(Function.identity(), Collectors.counting()));
+    }
+
+    public List<Pizza> getPizzas() {
+        List<Pizza> pizzasList = new ArrayList<>();
+        for (Pizza pizza : pizzas.keySet()) {
+            for (int i = 0; i < pizzas.get(pizza); i++) {
+                pizzasList.add(pizza);
+            }
+        }
+        return pizzasList;
     }
 }

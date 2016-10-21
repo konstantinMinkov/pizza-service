@@ -1,7 +1,11 @@
 package ua.rd.pizzaservice;
 
 import org.springframework.context.ConfigurableApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import ua.rd.pizzaservice.domain.Address;
+import ua.rd.pizzaservice.domain.Customer;
+import ua.rd.pizzaservice.infrastructure.config.ApplicationConfig;
+import ua.rd.pizzaservice.infrastructure.config.RepositoryConfig;
 import ua.rd.pizzaservice.services.OrderService;
 
 import java.util.Arrays;
@@ -10,16 +14,21 @@ import java.util.Arrays;
 public class SpringAppRunner {
 
     public static void main(String[] args) {
+//        ConfigurableApplicationContext repoContext =
+//                new ClassPathXmlApplicationContext("repoContext.xml");
         ConfigurableApplicationContext repoContext =
-                new ClassPathXmlApplicationContext("repoContext.xml");
-        System.out.println(Arrays.toString(repoContext.getBeanDefinitionNames()));
+                new AnnotationConfigApplicationContext(RepositoryConfig.class);
+        System.out.println("Repo" + Arrays.toString(repoContext.getBeanDefinitionNames()));
 
+//        ConfigurableApplicationContext appContext =
+//                new ClassPathXmlApplicationContext(new String[]{"appContext.xml"}, repoContext);
         ConfigurableApplicationContext appContext =
-                new ClassPathXmlApplicationContext(new String[]{"appContext.xml"}, repoContext);
+                new AnnotationConfigApplicationContext(ApplicationConfig.class);
+
         System.out.println(Arrays.toString(appContext.getBeanDefinitionNames()));
 
         System.out.println(appContext.getBean("orderService", OrderService.class)
-                .placeNewOrder(null, 1, 2, 3));
+                .placeNewOrder( new Customer("John", new Address("City, Road, number"), null), 1, 2, 3));
 
         repoContext.close();
         appContext.close();
