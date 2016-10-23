@@ -21,13 +21,15 @@ public class SimpleOrderService implements OrderService {
     private final OrderRepository orderRepository;
     private final PizzaService pizzaService;
     private final DiscountService discountService;
+    private final CardService cardService;
 
     @Autowired
     public SimpleOrderService(OrderRepository orderRepository, PizzaService pizzaService,
-                              DiscountService discountService) {
+                              DiscountService discountService, CardService cardService) {
         this.orderRepository = orderRepository;
         this.pizzaService = pizzaService;
         this.discountService = discountService;
+        this.cardService = cardService;
     }
 
     @Override
@@ -36,26 +38,33 @@ public class SimpleOrderService implements OrderService {
         checkCustomer(customer);
 
         List<Pizza> pizzas = findPizzasByIds(pizzasId);
-        Order newOrder = instantiateNewOrder();
-        newOrder.setCustomer(customer);
-        newOrder.setPizzas(pizzas);
+        Order order = instantiateNewOrder();
+        order.setCustomer(customer);
+        order.setPizzas(pizzas);
 
-        Long totalPrice = newOrder.totalPrice();
-        Long discounts = discountService.countDiscounts(newOrder);
-        Long totalWithDiscounts = totalPrice - discounts;
-        
-        // TODO: 15.10.2016 
-        // 1. how to manage with total?
-        // 2. save it
+        saveOrder(order);
+        return order;
+    }
+
+    @Override
+    public Long checkout(Order order) {
+        final Long totalWithDiscounts = countTotalWithDiscounts(order);
+
+        Customer customer = order.getCustomer();
+        checkCustomer(customer);
 
         LoyaltyCard card = customer.getLoyaltyCard();
         if (card != null) {
-            card.setBalance(card.getBalance() + totalPrice);
-            //// TODO: 15.10.2016 save card somewhere
+            cardService.addToBalance(card, totalWithDiscounts);
         }
-        
-        saveOrder(newOrder);
-        return newOrder;
+
+        return totalWithDiscounts;
+    }
+
+    private Long countTotalWithDiscounts(Order order) {
+        final Long totalPrice = order.totalPrice();
+        final Long discounts = discountService.countDiscounts(order);
+        return totalPrice - discounts;
     }
 
     private void checkCustomer(Customer customer) {

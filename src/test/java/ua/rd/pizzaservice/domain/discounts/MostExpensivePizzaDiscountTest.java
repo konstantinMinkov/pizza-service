@@ -26,9 +26,9 @@ public class MostExpensivePizzaDiscountTest {
     @Test
     public void testThreePizzasOrder() {
         createPresetOrder(
-                new Pizza(0, "Pizza 1", 240L, PizzaType.MEAT),
-                new Pizza(1, "Pizza 2", 140L, PizzaType.SEA),
-                new Pizza(2, "Pizza 3", 350L, PizzaType.VEGETARIAN)
+                new Pizza(0L, "Pizza 1", 240L, PizzaType.MEAT),
+                new Pizza(1L, "Pizza 2", 140L, PizzaType.SEA),
+                new Pizza(2L, "Pizza 3", 350L, PizzaType.VEGETARIAN)
         );
         assertThat(discount.apply(order), is(0L));
     }
@@ -36,10 +36,10 @@ public class MostExpensivePizzaDiscountTest {
     @Test
     public void testFourPizzasOrder() {
         createPresetOrder(
-                new Pizza(0, "Pizza 1", 240L, PizzaType.MEAT),
-                new Pizza(1, "Pizza 2", 140L, PizzaType.SEA),
-                new Pizza(2, "Pizza 3", 350L, PizzaType.VEGETARIAN),
-                new Pizza(3, "Pizza 4", 120L, PizzaType.MEAT)
+                new Pizza(0L, "Pizza 1", 240L, PizzaType.MEAT),
+                new Pizza(1L, "Pizza 2", 140L, PizzaType.SEA),
+                new Pizza(2L, "Pizza 3", 350L, PizzaType.VEGETARIAN),
+                new Pizza(3L, "Pizza 4", 120L, PizzaType.MEAT)
         );
         assertThat(discount.apply(order), is(0L));
     }
@@ -47,11 +47,11 @@ public class MostExpensivePizzaDiscountTest {
     @Test
     public void testFivePizzasOrder() {
         createPresetOrder(
-                new Pizza(0, "Pizza 1", 240L, PizzaType.MEAT),
-                new Pizza(1, "Pizza 2", 140L, PizzaType.SEA),
-                new Pizza(2, "Pizza 3", 300L, PizzaType.VEGETARIAN),
-                new Pizza(3, "Pizza 4", 120L, PizzaType.MEAT),
-                new Pizza(3, "Pizza 4", 120L, PizzaType.MEAT)
+                new Pizza(0L, "Pizza 1", 240L, PizzaType.MEAT),
+                new Pizza(1L, "Pizza 2", 140L, PizzaType.SEA),
+                new Pizza(2L, "Pizza 3", 300L, PizzaType.VEGETARIAN),
+                new Pizza(3L, "Pizza 4", 120L, PizzaType.MEAT),
+                new Pizza(3L, "Pizza 4", 120L, PizzaType.MEAT)
         );
         assertThat(discount.apply(order), is(90L));
     }

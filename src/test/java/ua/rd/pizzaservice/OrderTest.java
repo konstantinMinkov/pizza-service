@@ -66,7 +66,7 @@ public class OrderTest {
     private void fillWithPizzas(int quantity) {
         List<Pizza> pizzas = new ArrayList<>(quantity);
         for (int i = 0; i < quantity; i++) {
-            pizzas.add(new Pizza(i, "Pizza name " + i, 100L, PizzaType.MEAT));
+            pizzas.add(new Pizza((long) i, "Pizza name " + i, 100L, PizzaType.MEAT));
         }
         order.setPizzas(pizzas);
     }

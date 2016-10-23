@@ -11,8 +11,8 @@ import java.io.Serializable;
 public class Pizza implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    private Integer id;
+    @GeneratedValue
+    private Long id;
     private String name;
     private Long price;
     @Enumerated(EnumType.STRING)
@@ -26,7 +26,7 @@ public class Pizza implements Serializable {
         this.type = type;
     }
 
-    public Pizza(Integer id, String name, Long price, PizzaType type) {
+    public Pizza(Long id, String name, Long price, PizzaType type) {
         this.id = id;
         this.name = name;
         this.price = price;

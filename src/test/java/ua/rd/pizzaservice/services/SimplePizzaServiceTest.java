@@ -21,17 +21,17 @@ public class SimplePizzaServiceTest {
     @BeforeClass
     public static void createService() {
         final InMemoryPizzaRepository repository = mock(InMemoryPizzaRepository.class);
-        when(repository.findById(0)).thenReturn(new Pizza(0, "Pizza 1", 240L, PizzaType.MEAT));
-        when(repository.findById(1)).thenReturn(new Pizza(1, "Pizza 2", 140L, PizzaType.SEA));
-        when(repository.findById(2)).thenReturn(new Pizza(2, "Pizza 3", 350L, PizzaType.VEGETARIAN));
+        when(repository.findById(0)).thenReturn(new Pizza(0L, "Pizza 1", 240L, PizzaType.MEAT));
+        when(repository.findById(1)).thenReturn(new Pizza(1L, "Pizza 2", 140L, PizzaType.SEA));
+        when(repository.findById(2)).thenReturn(new Pizza(2L, "Pizza 3", 350L, PizzaType.VEGETARIAN));
         service = new SimplePizzaService(repository);
     }
 
     @Test
     public void testFindById() throws Exception {
-        assertThat(service.findById(0), is(new Pizza(0, "Pizza 1", 240L, PizzaType.MEAT)));
-        assertThat(service.findById(1), is(new Pizza(1, "Pizza 2", 140L, PizzaType.SEA)));
-        assertThat(service.findById(2), is(new Pizza(2, "Pizza 3", 350L, PizzaType.VEGETARIAN)));
+        assertThat(service.findById(0), is(new Pizza(0L, "Pizza 1", 240L, PizzaType.MEAT)));
+        assertThat(service.findById(1), is(new Pizza(1L, "Pizza 2", 140L, PizzaType.SEA)));
+        assertThat(service.findById(2), is(new Pizza(2L, "Pizza 3", 350L, PizzaType.VEGETARIAN)));
         assertThat(service.findById(3), is(nullValue()));
     }
 }

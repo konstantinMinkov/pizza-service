@@ -1,11 +1,14 @@
 package ua.rd.pizzaservice.domain;
 
 import lombok.*;
+import org.hibernate.annotations.*;
+import org.hibernate.annotations.CascadeType;
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 import javax.persistence.*;
+import javax.persistence.Entity;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -15,6 +18,7 @@ import java.util.stream.Collectors;
 
 
 @Data
+@Entity
 @Component
 @Scope(BeanDefinition.SCOPE_PROTOTYPE)
 @SequenceGenerator(sequenceName = "OrderSeq", name = "OrderSeq")
@@ -23,9 +27,15 @@ public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO, generator = "OrderSeq")
     private Long id;
+    @ManyToOne
     private Customer customer;
 
-    @Transient //todo
+    @Cascade(CascadeType.PERSIST)
+    @ElementCollection
+    @CollectionTable(name="Pizza")
+    @MapKeyJoinColumn(name="id")
+    @Column(name="Pizzas")
+    @Transient
     private Map<Pizza, Long> pizzas;
     private OrderStatus orderStatus;
 

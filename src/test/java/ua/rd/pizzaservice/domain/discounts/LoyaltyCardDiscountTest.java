@@ -53,10 +53,10 @@ public class LoyaltyCardDiscountTest {
     public void createPresetOrder(LoyaltyCard loyaltyCard) {
         order.setCustomer(new Customer("John", new Address("City, Road, number"), loyaltyCard));
         order.setPizzas(Arrays.asList(
-                new Pizza(1, "Pizza name", 100L, PizzaType.MEAT),
-                new Pizza(1, "Pizza name", 100L, PizzaType.VEGETARIAN),
-                new Pizza(1, "Pizza name", 100L, PizzaType.SEA),
-                new Pizza(1, "Pizza name", 100L, PizzaType.MEAT)
+                new Pizza(1L, "Pizza name", 100L, PizzaType.MEAT),
+                new Pizza(1L, "Pizza name", 100L, PizzaType.VEGETARIAN),
+                new Pizza(1L, "Pizza name", 100L, PizzaType.SEA),
+                new Pizza(1L, "Pizza name", 100L, PizzaType.MEAT)
         ));
     }
 }
