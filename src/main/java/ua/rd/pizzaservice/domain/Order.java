@@ -18,7 +18,7 @@ import java.util.stream.Collectors;
 
 
 @Data
-@Entity
+@Entity(name = "orders")
 @Component
 @Scope(BeanDefinition.SCOPE_PROTOTYPE)
 @SequenceGenerator(sequenceName = "OrderSeq", name = "OrderSeq")
@@ -30,12 +30,11 @@ public class Order {
     @ManyToOne
     private Customer customer;
 
-    @Cascade(CascadeType.PERSIST)
     @ElementCollection
-    @CollectionTable(name="Pizza")
-    @MapKeyJoinColumn(name="id")
-    @Column(name="Pizzas")
-    @Transient
+    @CollectionTable(name = "orders_to_pizzas")
+    @MapKeyJoinColumn(name = "pizza_id")
+    @Column(name = "quantity")
+    @Cascade(CascadeType.PERSIST)
     private Map<Pizza, Long> pizzas;
     private OrderStatus orderStatus;
 
