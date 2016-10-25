@@ -10,7 +10,8 @@
 
     <bean class="ua.rd.pizzaservice.infrastructure.BenchmarkBeanPostProcessor"/>
 
-    <bean id="loyaltyCardDiscount" class="ua.rd.pizzaservice.domain.discounts.LoyaltyCardDiscount">
+    <bean id="loyaltyCardDiscount"
+          class="ua.rd.pizzaservice.domain.discounts.LoyaltyCardDiscount">
         <constructor-arg index="0" value="10"/>
         <constructor-arg index="1" value="30"/>
     </bean>
@@ -20,7 +21,8 @@
         <constructor-arg value="30"/>
     </bean>
 
-    <bean id="discountService" class="ua.rd.pizzaservice.services.DiscountService">
+    <bean id="discountService"
+          class="ua.rd.pizzaservice.services.SimpleDiscountService">
         <constructor-arg>
             <list>
                 <ref bean="mostExpensivePizzaDiscount"/>
@@ -28,5 +30,4 @@
             </list>
         </constructor-arg>
     </bean>
-
 </beans>

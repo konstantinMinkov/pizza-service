@@ -1,18 +1,14 @@
 package ua.rd.pizzaservice.repository;
 
-import org.springframework.stereotype.Repository;
 import ua.rd.pizzaservice.domain.Pizza;
 import ua.rd.pizzaservice.domain.PizzaType;
-import ua.rd.pizzaservice.infrastructure.Benchmark;
-import ua.rd.pizzaservice.infrastructure.PostCreate;
 
 import javax.annotation.PostConstruct;
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
 
-@Repository
+//@Repository
 public class InMemoryPizzaRepository implements PizzaRepository {
 
     private final List<Pizza> availablePizzas = new ArrayList<>();
@@ -32,7 +28,12 @@ public class InMemoryPizzaRepository implements PizzaRepository {
 
 //    @Benchmark
     @Override
-    public Pizza findById(int id) {
+    public Pizza findById(Integer id) {
         return availablePizzas.get(id);
+    }
+
+    @Override
+    public Pizza save(Pizza pizza) {
+        throw new UnsupportedOperationException();
     }
 }

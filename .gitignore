@@ -1,3 +1,4 @@
 target
 pizza-service.iml
 .idea
+src/main/java/ua/rd/pizzaservice/resources/db.properties

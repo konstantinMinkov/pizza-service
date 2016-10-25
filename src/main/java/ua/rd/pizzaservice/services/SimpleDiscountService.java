@@ -8,7 +8,6 @@ import ua.rd.pizzaservice.domain.discounts.Discount;
 import java.util.List;
 
 
-@Service
 public class SimpleDiscountService implements DiscountService {
 
     private List<Discount> discounts;
