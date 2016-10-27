@@ -1,9 +1,10 @@
-package ua.rd.pizzaservice.repository;
+package ua.rd.pizzaservice.repository.jpa;
 
 
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 import ua.rd.pizzaservice.domain.Pizza;
+import ua.rd.pizzaservice.repository.PizzaRepository;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -16,7 +17,7 @@ public class JpaPizzaRepository implements PizzaRepository {
     private EntityManager entityManager;
 
     @Override
-    public Pizza findById(Integer id) {
+    public Pizza findById(Long id) {
         return entityManager.find(Pizza.class, id);
     }
 

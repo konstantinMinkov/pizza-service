@@ -1,7 +1,8 @@
-package ua.rd.pizzaservice.repository;
+package ua.rd.pizzaservice.repository.mem;
 
 import ua.rd.pizzaservice.domain.Pizza;
 import ua.rd.pizzaservice.domain.PizzaType;
+import ua.rd.pizzaservice.repository.PizzaRepository;
 
 import javax.annotation.PostConstruct;
 import java.util.ArrayList;
@@ -28,8 +29,8 @@ public class InMemoryPizzaRepository implements PizzaRepository {
 
 //    @Benchmark
     @Override
-    public Pizza findById(Integer id) {
-        return availablePizzas.get(id);
+    public Pizza findById(Long id) {
+        return availablePizzas.get(id.intValue());
     }
 
     @Override

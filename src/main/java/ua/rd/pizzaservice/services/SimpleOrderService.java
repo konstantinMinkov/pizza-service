@@ -33,7 +33,7 @@ public class SimpleOrderService implements OrderService {
     }
 
     @Override
-    public Order placeNewOrder(Customer customer, Integer ... pizzasId) {
+    public Order placeNewOrder(Customer customer, Long ... pizzasId) {
         checkPizzasQuantity(pizzasId);
         checkCustomer(customer);
 
@@ -42,8 +42,7 @@ public class SimpleOrderService implements OrderService {
         order.setCustomer(customer);
         order.setPizzas(pizzas);
 
-        saveOrder(order);
-        return order;
+        return saveOrder(order);
     }
 
     @Override
@@ -72,16 +71,16 @@ public class SimpleOrderService implements OrderService {
         if (customer.getAddress() == null) throw new IllegalArgumentException("Address is null");
     }
 
-    private void checkPizzasQuantity(Integer ... pizzasId) {
+    private void checkPizzasQuantity(Long ... pizzasId) {
         if (tooManyPizzasInOrder(pizzasId)) throw new IllegalStateException("Too many pizzas in order.");
         if (noPizzasInOrder(pizzasId)) throw new IllegalStateException("No pizzas in order.");
     }
 
-    private boolean noPizzasInOrder(Integer ... pizzasId) {
+    private boolean noPizzasInOrder(Long ... pizzasId) {
         return pizzasId.length == 0;
     }
 
-    private boolean tooManyPizzasInOrder(Integer ... pizzasId) {
+    private boolean tooManyPizzasInOrder(Long ... pizzasId) {
         return pizzasId.length > MAX_PIZZAS_IN_ORDER;
     }
 
@@ -90,20 +89,20 @@ public class SimpleOrderService implements OrderService {
         throw new IllegalStateException();
     }
 
-    private List<Pizza> findPizzasByIds(Integer ... ids) {
+    private List<Pizza> findPizzasByIds(Long ... ids) {
         List<Pizza> pizzas = new ArrayList<>();
-        for (Integer id : ids) {
+        for (Long id : ids) {
             pizzas.add(findPizzaById(id));
         }
         return pizzas;
     }
 
-    private Pizza findPizzaById(Integer id) {
+    private Pizza findPizzaById(Long id) {
         return pizzaService.findById(id);
     }
 
     @Benchmark
-    private void saveOrder(Order order) {
-        orderRepository.save(order);
+    private Order saveOrder(Order order) {
+        return orderRepository.save(order);
     }
 }

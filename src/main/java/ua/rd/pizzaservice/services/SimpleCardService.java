@@ -21,6 +21,6 @@ public class SimpleCardService implements CardService {
     public void addToBalance(LoyaltyCard card, long toAdd) {
         if (card == null) throw new IllegalArgumentException("Card is null.");
         card.setBalance(card.getBalance() + toAdd);
-        cardRepository.saveCard(card);
+        cardRepository.save(card);
     }
 }

@@ -5,5 +5,5 @@ import ua.rd.pizzaservice.domain.Pizza;
 
 public interface PizzaService {
 
-    Pizza findById(Integer pizzaID);
+    Pizza findById(Long pizzaID);
 }

@@ -1,4 +1,4 @@
-package ua.rd.pizzaservice.infrastructure.config;
+package ua.rd.pizzaservice.config;
 
 
 import org.apache.commons.dbcp2.BasicDataSource;

@@ -2,14 +2,10 @@ package ua.rd.pizzaservice;
 
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
 import ua.rd.pizzaservice.domain.Address;
 import ua.rd.pizzaservice.domain.Customer;
-import ua.rd.pizzaservice.domain.Pizza;
-import ua.rd.pizzaservice.domain.PizzaType;
-import ua.rd.pizzaservice.infrastructure.config.ApplicationConfig;
-import ua.rd.pizzaservice.infrastructure.config.RepositoryConfig;
-import ua.rd.pizzaservice.repository.PizzaRepository;
+import ua.rd.pizzaservice.config.ApplicationConfig;
+import ua.rd.pizzaservice.config.RepositoryConfig;
 import ua.rd.pizzaservice.services.OrderService;
 
 import java.util.Arrays;
@@ -31,14 +27,14 @@ public class SpringAppRunner {
 
         System.out.println(Arrays.toString(appContext.getBeanDefinitionNames()));
 
-//        System.out.println(appContext.getBean("orderService", OrderService.class)
-//                .placeNewOrder( new Customer("John", new Address("City, Road, number"), null), 1, 2, 3));
+        System.out.println(appContext.getBean("orderService", OrderService.class)
+                .placeNewOrder( new Customer("John", new Address("City, Road, number"), null), 1L, 2L, 3L));
 
-        Pizza pizza = new Pizza("pizza", 10L, PizzaType.SEA);
+//        Pizza pizza = new Pizza("pizza", 10L, PizzaType.SEA);
 
-        pizza = appContext.getBean("jpaPizzaRepository", PizzaRepository.class).save(pizza);
+//        pizza = appContext.getBean("jpaPizzaRepository", PizzaRepository.class).save(pizza);
 
-        System.out.println(pizza);
+//        System.out.println(pizza);
 
         repoContext.close();
         appContext.close();

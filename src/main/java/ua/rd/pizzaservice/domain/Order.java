@@ -28,13 +28,14 @@ public class Order {
     @GeneratedValue(strategy = GenerationType.AUTO, generator = "OrderSeq")
     private Long id;
     @ManyToOne
+    @Cascade({CascadeType.PERSIST, CascadeType.MERGE})
     private Customer customer;
 
     @ElementCollection
     @CollectionTable(name = "orders_to_pizzas")
     @MapKeyJoinColumn(name = "pizza_id")
     @Column(name = "quantity")
-    @Cascade(CascadeType.PERSIST)
+    @Cascade({CascadeType.PERSIST, CascadeType.MERGE})
     private Map<Pizza, Long> pizzas;
     private OrderStatus orderStatus;
 

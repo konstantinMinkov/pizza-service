@@ -1,13 +1,14 @@
-package ua.rd.pizzaservice.repository;
+package ua.rd.pizzaservice.repository.mem;
 
 import org.springframework.stereotype.Repository;
 import ua.rd.pizzaservice.domain.Order;
+import ua.rd.pizzaservice.repository.OrderRepository;
 
 import java.util.ArrayList;
 import java.util.List;
 
 
-@Repository
+//@Repository
 public class InMemoryOrderRepository implements OrderRepository {
 
     private List<Order> orders = new ArrayList<>();

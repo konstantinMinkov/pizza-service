@@ -6,7 +6,7 @@ import ua.rd.pizzaservice.domain.Order;
 
 public interface OrderService {
 
-    Order placeNewOrder(Customer customer, Integer ... pizzasID);
+    Order placeNewOrder(Customer customer, Long ... pizzasID);
 
     Long checkout(Order order);
 }

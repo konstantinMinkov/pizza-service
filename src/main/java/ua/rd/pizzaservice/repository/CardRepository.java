@@ -6,6 +6,6 @@ import ua.rd.pizzaservice.domain.LoyaltyCard;
 
 public interface CardRepository {
 
-    void saveCard(LoyaltyCard card);
-    LoyaltyCard findCardById(Long id);
+    LoyaltyCard findById(Long id);
+    LoyaltyCard save(LoyaltyCard card);
 }
