@@ -20,6 +20,7 @@ public class SimpleCardService implements CardService {
     @Override
     public void addToBalance(LoyaltyCard card, long toAdd) {
         if (card == null) throw new IllegalArgumentException("Card is null.");
+        if (toAdd < 0) throw new IllegalArgumentException("toAdd value is negative.");
         card.setBalance(card.getBalance() + toAdd);
         cardRepository.save(card);
     }
