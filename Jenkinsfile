@@ -1,4 +1,4 @@
 node ('master') {
   stage 'Build and Test'
-  sh 'mvn clean install'
+  bat 'mvn clean install'
 }
