@@ -29,8 +29,9 @@ public class LoyaltyCardDiscount implements Discount {
         long discount = discountFromCard(loyaltyCard);
 
         if (discount > maxDiscount) {
-            return maxDiscount;
+            discount = maxDiscount;
         }
+        loyaltyCard.setBalance(loyaltyCard.getBalance() - discount);
         return discount;
     }
 
