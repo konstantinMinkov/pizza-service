@@ -16,8 +16,8 @@ import java.util.concurrent.atomic.AtomicLong;
 @Entity
 public class Customer {
 
-    @Id
-    @GeneratedValue
+    @TableGenerator(name="customer_gen")
+    @Id @GeneratedValue(generator="customer_gen")
     private Long id;
     private String name;
     @ManyToOne

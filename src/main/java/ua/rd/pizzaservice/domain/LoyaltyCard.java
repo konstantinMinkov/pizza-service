@@ -6,6 +6,7 @@ import lombok.*;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.TableGenerator;
 
 
 @Data
@@ -13,8 +14,8 @@ import javax.persistence.Id;
 @Entity
 public class LoyaltyCard {
 
-    @Id
-    @GeneratedValue
+    @TableGenerator(name="card_gen")
+    @Id @GeneratedValue(generator="card_gen")
     private Long id;
     private Long balance;
 

@@ -21,11 +21,10 @@ import java.util.stream.Collectors;
 @Entity(name = "orders")
 @Component
 @Scope(BeanDefinition.SCOPE_PROTOTYPE)
-@SequenceGenerator(sequenceName = "OrderSeq", name = "OrderSeq")
 public class Order {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO, generator = "OrderSeq")
+    @TableGenerator(name="order_gen")
+    @Id @GeneratedValue(generator="order_gen")
     private Long id;
     @ManyToOne
     @Cascade({CascadeType.PERSIST, CascadeType.MERGE})

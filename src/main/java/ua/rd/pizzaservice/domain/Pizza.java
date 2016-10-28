@@ -10,8 +10,8 @@ import java.io.Serializable;
 @Entity
 public class Pizza implements Serializable {
 
-    @Id
-    @GeneratedValue
+    @TableGenerator(name="pizza_gen")
+    @Id @GeneratedValue(generator="pizza_gen")
     private Long id;
     private String name;
     private Long price;
