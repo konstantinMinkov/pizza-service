@@ -1,5 +1,6 @@
 node ('master') {
   stage 'Build and Test'
-  checkout scm
-  sh 'mvn clean package'
+  def mvnHome = tool 'M3'
+  env.PATH = "${mvnHome}/bin:${env.PATH}"
+  sh 'mvn clean install'
 }
