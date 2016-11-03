@@ -6,6 +6,9 @@ import ua.rd.pizzaservice.domain.Address;
 import ua.rd.pizzaservice.domain.Customer;
 import ua.rd.pizzaservice.config.ApplicationConfig;
 import ua.rd.pizzaservice.config.RepositoryConfig;
+import ua.rd.pizzaservice.domain.Pizza;
+import ua.rd.pizzaservice.domain.PizzaType;
+import ua.rd.pizzaservice.repository.PizzaRepository;
 import ua.rd.pizzaservice.services.OrderService;
 
 import java.util.Arrays;
@@ -28,7 +31,7 @@ public class SpringAppRunner {
         System.out.println(Arrays.toString(appContext.getBeanDefinitionNames()));
 
         System.out.println(appContext.getBean("orderService", OrderService.class)
-                .placeNewOrder( new Customer("John", new Address("City, Road, number"), null), 1L, 2L, 3L));
+                .placeNewOrder( new Customer("John", new Address("City, Road, number"), null), 1L, 52L, 102L));
 
 //        Pizza pizza = new Pizza("pizza", 10L, PizzaType.SEA);
 
