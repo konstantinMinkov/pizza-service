@@ -2,6 +2,7 @@ package ua.rd.pizzaservice.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import ua.rd.pizzaservice.domain.Pizza;
 import ua.rd.pizzaservice.infrastructure.Benchmark;
 import ua.rd.pizzaservice.repository.PizzaRepository;
@@ -21,5 +22,11 @@ public class SimplePizzaService implements PizzaService {
     @Benchmark
     public Pizza findById(Long pizzaId) {
         return pizzaRepository.findById(pizzaId);
+    }
+
+    @Override
+    @Transactional
+    public Pizza save(Pizza pizza) {
+        return pizzaRepository.save(pizza);
     }
 }
