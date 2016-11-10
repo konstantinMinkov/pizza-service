@@ -7,6 +7,6 @@
     <context:component-scan base-package="ua.rd.pizzaservice.web"/>
 
     <bean name="handlerMappingStrategy"
-          class="ua.rd.pizzaservice.web.infrastructure.SimpleUrlHandlerMapping"/>
+          class="ua.rd.pizzaservice.web.infrastructure.AnnotationDrivenHandlerMapping"/>
 
 </beans>

@@ -58,7 +58,6 @@ public class DispatcherServlet extends HttpServlet {
     private void processRequest(HttpServletRequest request, HttpServletResponse response) {
         HandlerMapping handlerMapping = webContext.getBean("handlerMappingStrategy",
                 HandlerMapping.class);
-        //new SimpleUrlHandlerMapping(webContext);
 
         MyController controller = handlerMapping.getController(request);//getController(controllerName);
 
